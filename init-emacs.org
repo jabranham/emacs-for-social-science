@@ -1,0 +1,266 @@
+#+TITLE: Emacs configuration
+* Your customizations
+  You will need to tell Emacs a little about your particular setup:
+
+  First, let Emacs know where it is you keep your =.bib= file:
+
+
+  #+BEGIN_SRC emacs-lisp
+    (defvar my/bib-file-location "~/Dropbox/bibliography/references.bib"
+      "Where I keep my bib file.")
+  #+END_SRC
+
+* Emacs package management
+  This section sets up emacs' package management system. MELPA and
+  ELPA are the two biggest repos for packages. Windows is a pain
+  because it doesn't work well with =https= so we have to fallback to
+  =http=. The second thing we do here is to make sure that [[https://github.com/jwiegley/use-package][use-package]]
+  is installed:
+
+  #+BEGIN_SRC emacs-lisp
+    (require 'package)
+    (setq package-enable-at-startup nil)
+
+    ;; Windows has issues using https:// instead of http:// so we want to
+    ;; set the package locations to use the secure connection when they
+    ;; can:
+    (cond
+     ((string-equal system-type "windows-nt") ; Microsoft Windows
+      (progn
+        (setq package-archives
+              '(("melpa" . "http://melpa.org/packages/")
+                ("elpa" . "http://elpa.gnu.org/packages/")))))
+     ((or (string-equal system-type "gnu/linux") (string-equal system-type "darwin")) ; Linux & Mac OS X
+      (progn
+        (setq package-archives
+              '(("melpa-stable" . "http://stable.melpa.org/packages/")
+                ("melpa" . "http://melpa.org/packages/")
+                ("elpa" . "http://elpa.gnu.org/packages/"))))))
+
+    (package-initialize)
+
+    ;; We'll use the use-package package to mange our config. Make sure
+    ;; it's installed:
+    (unless (package-installed-p 'use-package)
+      (package-refresh-contents)
+      (package-install 'use-package))
+
+    ;; Make use-package available for use:
+    (eval-when-compile
+      (require 'use-package))
+    (require 'bind-key)
+
+  #+END_SRC
+
+* R (ESS)
+  ESS (short for Emacs Speaks Statistics) is the package that lets
+  Emacs know about R and how it works. Let's load it up. No need to
+  make sure that it is installed like we did with =use-package= in the
+  previous section - =use-package= lets us just say "ensure" and will
+  install it if it doesn't exist:
+
+  #+BEGIN_SRC emacs-lisp
+    (use-package ess-site
+      :ensure ess
+      )
+  #+END_SRC
+
+* Latex (AuCTeX)
+  If you use latex to do any writing, you'll be happy to know that
+  emacs is the highest-rated latex editor [[http://tex.stackexchange.com/questions/339/latex-editors-ides/][on stackexchange]]. 
+  
+  #+BEGIN_SRC emacs-lisp
+    (use-package auctex
+      :ensure t
+      :mode ("\\.tex\\'" . latex-mode)
+      :config
+      (setq TeX-parse-self t)
+      ;; Here we make auctex aware of latexmk and xelatexmk. We can use
+      ;; these instead of calling pdflatex, bibtex, pdflatex, pdflatex (or
+      ;; similar). I'll set latexmk as the default as there's really no
+      ;; reason to use pdflatex
+      (eval-after-load "tex"
+        '(add-to-list 'TeX-command-list '("latexmk" "latexmk -synctex=1 -shell-escape -pdf %s" TeX-run-TeX nil t :help "Process file with latexmk")))
+      (eval-after-load "tex"
+        '(add-to-list 'TeX-command-list '("xelatexmk" "latexmk -synctex=1 -shell-escape -xelatex %s" TeX-run-TeX nil t :help "Process file with xelatexmk")))
+      (add-hook 'TeX-mode-hook '(lambda () (setq TeX-command-default "latexmk"))))
+  #+END_SRC
+
+* Markdown
+  Markdown is a good way to write up most things, though it doesn't
+  hold a candle to emacs's built-in org-mode:
+
+  #+BEGIN_SRC emacs-lisp
+    (use-package markdown-mode
+      :ensure t)
+  #+END_SRC
+
+* Rmarkdown/knitr (polymode)
+  Polymode is a package that lets us use emacs to edit rmarkdown and
+  sweave-type files that combine markdown or latex with R code. Let's
+  load it up and make it aware of the file extensions:
+
+  #+BEGIN_SRC emacs-lisp
+    (use-package polymode
+      :ensure t
+      :mode
+      ("\\.Snw" . poly-noweb+r-mode)
+      ("\\.Rnw" . poly-noweb+r-mode)
+      ("\\.Rmd" . poly-markdown+r-mode)
+      )
+  #+END_SRC
+
+* Git (magit)
+  Magit is an Emacs package that makes dealing with git awesome.
+
+  #+BEGIN_SRC emacs-lisp
+    (use-package magit
+      :ensure t
+      :bind ("C-x g" . magit-status)
+      )
+  #+END_SRC
+
+* Helm 
+  "[[https://emacs-helm.github.io/helm/][Helm]] is an Emacs framework for incremental completions and narrowing
+  selections. It helps to rapidly complete file names, buffer names,
+  or any other Emacs interactions requiring selecting an item from a
+  list of possible choices."
+
+  Of course, Emacs has something like that built-in. It's called =ido=
+  (interactively do things) and it works just fine. I prefer helm, but
+  that's a matter of personal opinion. Why, then, am I including helm
+  in this supposedly /minimal/ Emacs configuration? Simple: =helm-bibtex=.
+  =helm-bibtex= lets you search and manage your BibTeX bib files super
+  easily. You can also easily select entries and insert
+  properly-formatted citations in both latex and (r)markdown. 
+
+
+  #+BEGIN_SRC emacs-lisp
+    (use-package helm-config
+      :ensure helm
+      :bind
+      ("C-c h" . helm-command-prefix)
+      ("M-x" . helm-M-x)
+      ("M-y" . helm-show-kill-ring)
+      ("C-x b" . helm-mini)
+      ("C-x C-f" . helm-find-files)
+      ("C-x f" . helm-find-files)
+      ("C-M-z" . helm-resume)
+      ("C-M-g" . helm-google-suggest)
+      :config
+      (define-key global-map [remap list-buffers] 'helm-buffers-list)
+      (define-key global-map [remap dabbrev-expand] 'helm-dabbrev)
+      (progn
+        (helm-mode 1)
+        (helm-adaptive-mode 1)
+        (helm-push-mark-mode 1))
+      (define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action) ; rebind tab to do persistent action
+      (define-key helm-map (kbd "C-i") 'helm-execute-persistent-action) ; make TAB works in terminal
+      (define-key helm-map (kbd "C-z")  'helm-select-action) ; list actions using C-z
+      (setq helm-split-window-in-side-p t)
+      (setq helm-ff-file-name-history-use-recentf t)
+      (setq helm-mode-fuzzy-match t)
+      (setq helm-completion-in-region-fuzzy-match t))
+  #+END_SRC
+
+* References & bibliographies 
+  This package configuration lets you type =C-c ]= in a latex/markdown
+  buffer to bring up a list of your references. You can then search
+  through it til you find the one you want. Hitting =TAB= lets you
+  decide what you want to do (e.g. insert a citation). =helm-bibtex= can
+  also keep track of pdfs of articles and notes that you take
+  pertaining to these articles. Since this is a "minimal"
+  configuration, I don't set that up here. If you're interested, look
+  at =bibtex-completion-library-path= and =bibtex-completion-notes-path=
+
+  #+BEGIN_SRC emacs-lisp
+    (use-package helm-bibtex
+      :ensure t
+      :init
+      (eval-after-load "latex"
+        '(define-key LaTeX-mode-map (kbd "C-c r") #'helm-bibtex))
+      (eval-after-load 'markdown-mode
+        '(define-key markdown-mode-map (kbd "C-c r") #'helm-bibtex))
+      :config 
+      (setq bibtex-completion-bibliography my/bib-file-location))
+  #+END_SRC
+
+* Dealing with default emacs
+  Emacs was created probably before you were born, which makes it
+  super ancient in computer terms. In this section, we override some
+  of the (now) silly default behavior so that emacs acts more like we
+  expect a program to act in the 21st century. We'll load up some
+  better default settings, activate auto-completion, and enable a
+  smart way of dealing with pairs (e.g. parentheses, quotes, etc)
+
+  In particular, we load =better-defaults=, a package that selects some
+  better default settings for Emacs. it you're interested what it
+  does, you can look at it [[https://github.com/technomancy/better-defaults][on github]]:
+
+  #+BEGIN_SRC emacs-lisp
+    (delete-selection-mode) ; if I select something then type, delete it and replace it
+    (use-package better-defaults
+      :ensure t)
+  #+END_SRC
+
+  In my world, =C-z= is undo, not minimize emacs:
+
+  #+BEGIN_SRC emacs-lisp
+    (global-set-key (kbd "C-z") #'undo)
+  #+END_SRC
+
+  We also want words to wrap around nicely. The default behavior wraps
+  in the middle of a word, which is awful:
+
+  #+BEGIN_SRC emacs-lisp
+    (visual-line-mode)
+  #+END_SRC
+
+** Auto completion 
+   We'll use =company= (short for "complete anything") to do
+   auto-completion. This will, for example, enable the same kind of
+   pop-up messages that mimic [[https://support.rstudio.com/hc/en-us/articles/205273297-Code-Completion][Rstudio's autocomplete features]]. As of
+   this writing (August 2016), Emacs' autocompletion isn't quite as
+   good as Rstudios. In particular, it won't pick up on variables from
+   =data.frames= that you've passed to e.g. =dplyr= functions through
+   piping calls. (e.g. ~mtcars %>% filter()~) won't give you =mpg= as an
+   option inside the filter statement. Having said that, =company= does
+   a really good job:
+
+
+   #+BEGIN_SRC emacs-lisp
+     (use-package company
+       :ensure t
+       :init
+       (add-hook 'after-init-hook 'global-company-mode)
+       :config
+       (use-package company-quickhelp
+         :ensure t
+         :config
+         (company-quickhelp-mode 1)))
+   #+END_SRC
+
+** Smartparens
+   This package will help you deal with matching pairs (e.g. (), "",
+   etc) by automatically inserting the closing pair when you open it
+   and allowing you to "wrap" expressions that are selected (in other
+   words, if you've already written something and you realize you want
+   it in quotes/parens, just highlight it and press the " or ( ):
+
+
+   #+BEGIN_SRC emacs-lisp
+     (use-package smartparens-config
+       :ensure smartparens
+       :init
+       (smartparens-global-mode))
+   #+END_SRC
+
+** Backup files
+   I want emacs to make these, but don't want to clutter up my project
+   folders with tons of backup files. Solution: put them in the
+   ~.emacs.d/~ directory.
+   #+BEGIN_SRC emacs-lisp
+     (setq backup-directory-alist
+           `(("." . ,(expand-file-name
+                      (concat user-emacs-directory "backups")))))
+   #+END_SRC
