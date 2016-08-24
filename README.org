@@ -1,40 +1,101 @@
 * Introduction
 
-  This is intended to be a sort of minimal emacs starter kit for people
-  who tend to use some combination of R, LaTeX, and/or markdown. I
+  This is intended to be a minimal emacs starter kit for people doing
+  academic writing with a combination of R, LaTeX, and/or markdown. I
   wrote this because I got tired of saying something along the lines
   of: "No, I don't use Rstudio. I use emacs, but it's kind of a pain
   to get set up..."
 
   No more. Now that I've written this I can shamelessly recommend it
-  to people.  
-
-  This is designed to be a /very/ minimalistic configuration for emacs.
-  It's nowhere near as complicated as [[https://github.com/jabranham/emacs][my own personal emacs config
-  file]]. In fact, the whole =init.el= file (more on that in a bit) is
-  only 85 lines long. In contrast, my =init.el= is about 2,000 lines
-  long.
+  to people.
 
   So this should get people the absolute bare minimum needed to get
   started using R/latex/markdown/rmarkdown/sweave/knitr in emacs.
 
   As far as I know, this works on all versions of emacs greater than
-  24 across Linux, Mac, and Windows operating systems. 
+  24.5.1 across Linux, Mac, and Windows operating systems. If you run
+  into a problem, feel free to email me or create an issue in [[https://github.com/jabranham/emacs-for-social-science][this]]
+  github repo.
+* Installation 
+** Step 1: Install Emacs 
+   Installation instructions for Emacs are OS specific:
+*** Linux/BSD
+    Use your package manager
+*** MacOS/OS X
+    https://emacsformacosx.com/
+*** Windows 
+    These instructions are a condensed version of the official
+    README. If you run into problems, consult the README:
+    1. Go to [[http://ftp.gnu.org/gnu/emacs/windows/][this website]]
+    2. Download the latest version of Emacs (24.5 as of this writing)
+    3. Unzip that file into a directory where you want to install
+       Emacs (=C:\Program Files=, for example)
+    4. Run the =runemacs.exe= file inside the newly-created =bin= folder
+       1. Optionally, you can add Emacs to the start menu by running
+          the =addpm.exe= file
+** Step 2: Clone this repo 
+   Now that you've installed Emacs, you'll want to use these
+   customizations so it works with R/markdown/latex/git etc. The
+   easiest way is to do that with git, if you know how to use it. 
 
-* First Steps
+   *Note for Windows users:* You'll have to figure out where Emacs
+   thinks your "home" is. One way to do this is to open Emacs, and do
+   =C-x d= (hold control, press x, release, then press d). It'll ask
+   you what directory you want, tell it =~= and note wherever it
+   opens. For me (Windows 10), this was
+   =C:\Users\<myusername>\AppData\Roaming\= but it may be different
+   for you. You can also set up an environmental variable =HOME= as
+   described in [[https://www.emacswiki.org/emacs/MsWindowsDotEmacs][the wiki]].
+   
+*** If you know =git=: 
+    #+BEGIN_SRC sh
+      git clone https://github.com/jabranham/emacs-for-social-science.git ~/.emacs.d/
+    #+END_SRC
+   
+    Windows users will need to replace =~/.emacs.d/ with wherever
+    Emacs is calling home, as described above.
+    
+*** If you don't know git:
+    Download a [[https://github.com/jabranham/emacs-for-social-science/archive/master.zip][zipped version]] and extract it into =~/.emacs.d/=. 
 
-  The first thing that I would do is to go through the emacs tutorial
-  just to get used to the emacs way of doing things. You can access
-  the tutorial by pressing =C-h t= (that's "press =control= and hold,
-  press =h=. Release both of those, then press =t="). The tutorial
-  explains the most basic functions like moving around and what a
-  buffer is. 
+    Windows users will need to replace =~/.emacs.d/ with wherever
+    Emacs is calling home, as described above.
+    
+** Step 3: Start Emacs
+   When you start Emacs, it should start downloading and compiling
+   some files (packages). Just sit back for this part - it'll take a
+   minute. You may need to answer "y" when prompted about saving
+   abbreviations. It will output warnings and some messages - you may
+   ignore these. If the process stops, quit Emacs and restart it.
 
-* Next Steps
-  
-  There are so many places to go from here! 
-** references
-   One of the best things I did was to set up the =org-ref= (and
-   =helm-bibtex=) package. This gives me a consistent way to manage
-   references, notes, and the like across latex, markdown, and
-   org-mode
+   If you restart Emacs and are presented with an ugly screen with
+   some links to a tutorial, walkthrough, and others, and NO errors,
+   then everything has set up successfully! You're ready to go. 
+
+   You'll need to set up a few things like telling Emacs where your
+   big =.bib= file is. All of these are in the =init-emacs.org= file
+   near the top under the section "Your customizations". So, for
+   example, to let Emacs know about your big bib file, you would
+   change the value of the =my/bib-file-location= to wherever your bib
+   file is located on your computer.
+   
+* Usage
+
+  You should be set up and ready to use Emacs for R, (r)markdown,
+  latex, and git. Emacs will also support a lot of other programming
+  languages out-of-the-box.
+
+  To open a file, do =C-x f=, which opens a buffer showing the files
+  and folders of your current directory.You can open a file by
+  selecting it (navigate up/down using the arrow keys or =C-p= /
+  =C-n=). To go up a directory, hit =C-l=. To go down into a folder,
+  have it selected and hit =C-j=. You can learn more basic Emacs
+  functionality by going through the tutorial with =C-h t=.
+
+** R
+
+** (r)markdown
+
+** latex
+
+** git
