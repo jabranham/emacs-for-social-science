@@ -66,6 +66,8 @@
     (delete-selection-mode) ; if I select something then type, delete it and replace it
     (use-package better-defaults
       :ensure t)
+    (setq scroll-conservatively 1000) ; when point moves offscreen, don't
+                                      ; jump to recenter it
   #+END_SRC
 
   In my world, =C-z= is undo, not minimize emacs:
@@ -131,7 +133,23 @@
            `(("." . ,(expand-file-name
                       (concat user-emacs-directory "backups")))))
    #+END_SRC
-
+   
+** Spell check 
+   We can use =flyspell= for on-the-fly spell checking, similar to
+   what we get with MS Word or whatever.
+   #+BEGIN_SRC emacs-lisp
+     (use-package flyspell
+       :ensure t
+       :init
+       (autoload 'flyspell-mode "flyspell" "On-the-fly spelling checker." t)
+       :config
+       ;; (setq ispell-list-command "--list")
+       (add-hook 'text-mode-hook #'turn-on-flyspell)
+       (add-hook 'LaTeX-mode-hook #'turn-on-flyspell)
+       (add-hook 'markdown-mode-hook #'turn-on-flyspell)
+       (add-hook 'org-mode-hook #'turn-on-flyspell)
+       (add-hook 'prog-mode-hook #'flyspell-prog-mode))
+   #+END_SRC
 * R (ESS)
   ESS (short for Emacs Speaks Statistics) is the package that lets
   Emacs know about R and how it works. Let's load it up. No need to
@@ -235,7 +253,6 @@
       :config
       (define-key global-map [remap list-buffers] 'helm-buffers-list)
       (define-key global-map [remap dabbrev-expand] 'helm-dabbrev)
-
       (define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action) ; rebind tab to do persistent action
       (define-key helm-map (kbd "C-i") 'helm-execute-persistent-action) ; make TAB works in terminal
       (define-key helm-map (kbd "C-z")  'helm-select-action) ; list actions using C-z
