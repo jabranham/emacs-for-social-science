@@ -32,9 +32,9 @@
      ((or (string-equal system-type "gnu/linux") (string-equal system-type "darwin")) ; Linux & Mac OS X
       (progn
         (setq package-archives
-              '(("melpa-stable" . "http://stable.melpa.org/packages/")
-                ("melpa" . "http://melpa.org/packages/")
-                ("elpa" . "http://elpa.gnu.org/packages/"))))))
+              '(("melpa-stable" . "https://stable.melpa.org/packages/")
+                ("melpa" . "https://melpa.org/packages/")
+                ("elpa" . "https://elpa.gnu.org/packages/"))))))
 
     (package-initialize)
 
@@ -263,7 +263,7 @@
   #+END_SRC
 
 * References & bibliographies 
-  This package configuration lets you type =C-c ]= in a latex/markdown
+  This package configuration lets you type =C-c r= in a latex/markdown
   buffer to bring up a list of your references. You can then search
   through it til you find the one you want. Hitting =TAB= lets you
   decide what you want to do (e.g. insert a citation). =helm-bibtex= can
