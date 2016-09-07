@@ -117,9 +117,6 @@
        :config
        ;; (setq ispell-list-command "--list")
        (add-hook 'text-mode-hook #'turn-on-flyspell)
-       (add-hook 'LaTeX-mode-hook #'turn-on-flyspell)
-       (add-hook 'markdown-mode-hook #'turn-on-flyspell)
-       (add-hook 'org-mode-hook #'turn-on-flyspell)
        (add-hook 'prog-mode-hook #'flyspell-prog-mode))
    #+END_SRC
 * R (ESS)

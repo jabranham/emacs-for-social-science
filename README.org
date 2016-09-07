@@ -32,12 +32,12 @@ This is a *WORK-IN-PROGRESS* and may not work for you.
       git clone https://github.com/jabranham/emacs-for-social-science.git ~/.emacs.d/
     #+END_SRC
    
-    Windows users will need to replace =~/.emacs.d/ with wherever Emacs is calling home, as described above.
+    Windows users will need to replace =~= with wherever Emacs is calling home, as described above.
     
 *** If you don't know git:
     Download a [[https://github.com/jabranham/emacs-for-social-science/archive/master.zip][zipped version]] and extract it into =~/.emacs.d/=. 
 
-    Windows users will need to replace =~/.emacs.d/ with wherever Emacs is calling home, as described above.
+    Windows users will need to replace =~= with wherever Emacs is calling home, as described above.
     
 ** Step 3: Start Emacs
    When you start Emacs, it should start downloading and compiling some files (packages). Just sit back for this part - it'll take a minute. You may need to answer "y" when prompted about saving abbreviations. It will output warnings and some messages - you may ignore these. If the process stops, quit Emacs and restart it.
@@ -48,16 +48,15 @@ This is a *WORK-IN-PROGRESS* and may not work for you.
    
 * Usage
 
+  Many of Emacs' keybindings look something like =C-c= or =M-c=. The first says control-c, the second meta-c. The meta key is usually alt. =M-x= provides a searchable list of commands you can run, so if you can't remember the exact name, you can look it up using =M-x=. 
+
   You should be set up and ready to use Emacs for R, (r)markdown, latex, and git. Emacs will also support a lot of other programming languages out-of-the-box.
 
   To open a file, do =C-x f=, which opens a buffer showing the files and folders of your current directory.You can open a file by selecting it (navigate up/down using the arrow keys or =C-p= / =C-n=). To go up a directory, hit =C-l=. To go down into a folder, have it selected and hit =C-j=. You can learn more basic Emacs functionality by going through the tutorial with =C-h t=.
 
   =C-c C-r= will let you browse your bibliography from any window. You may also insert citations in latex and markdown using =C-c C-r=. 
-** R
-   =C-RET= sends a line to be evaluated
 
-** (r)markdown
+  Emacs thinks about "buffers" in terms of a major mode. So when you're editing an markdown file, emacs is in markdown-mode. You can learn about the current major mode, including useful keybindings, by pressing =C-h m= (=C-h= is help, then =m= for mode). If you want to learn about a function, you can press =C-h f=, and if you want to learn about a variable =C-h v=. 
 
-** latex
-
-** git
+* Further customization 
+  
