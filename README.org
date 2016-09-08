@@ -56,7 +56,16 @@ This is a *WORK-IN-PROGRESS* and may not work for you.
 
   =C-c C-r= will let you browse your bibliography from any window. You may also insert citations in latex and markdown using =C-c C-r=. 
 
-  Emacs thinks about "buffers" in terms of a major mode. So when you're editing an markdown file, emacs is in markdown-mode. You can learn about the current major mode, including useful keybindings, by pressing =C-h m= (=C-h= is help, then =m= for mode). If you want to learn about a function, you can press =C-h f=, and if you want to learn about a variable =C-h v=. 
+  Emacs thinks about "buffers" in terms of a major mode. So when you're editing an markdown file, emacs is in markdown-mode. You can learn about the current major mode, including useful keybindings, by pressing =C-h m= (=C-h= is help, then =m= for mode). So if you do that when you're editing an R script, you'll learn that =C-RET= (control-enter) is bound to =ess-eval-region-or-line-and-step=, which (as the function name suggests), will evaluate a region if selected. If not, it will evaluate the line that point (your cursor) is on, and then it will "step" (i.e. move to the next bit of code). 
+
+  If you want to learn about a function, you can press =C-h f=, and if you want to learn about a variable =C-h v=. 
 
 * Further customization 
+
+  In [[file:init-emacs.org]] I've pointed out a few options you may wish to customize, such as =bibtex-complation-library-path= (for keeping track of pdfs associated with articles in your bib file) and =bibtex-completion-notes-path= (for keeping track of notes associated with entries in your bib file). Customization is usually as easy as setting the value of a variable. For example, set up where you keep pdfs, you could put the following under the =:config= of =use-package helm-bibtex=:
+
+  #+BEGIN_EXAMPLE
+    (setq bibtex-completion-library-path "~/Dropbox/reference-pdfs")
+  #+END_EXAMPLE
+
   
