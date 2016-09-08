@@ -1,4 +1,4 @@
-This is a *WORK-IN-PROGRESS* and may not work for you.
+This is a *WORK-IN-PROGRESS* and may not work for you. I have tried to make this as minimal as possible while still providing a reasonably-well working configuration out-of-the-box for R, latex, markdown, and git (all with reference management). If anything does not work or you feel something is missing, please let me know via the github issues. 
 * Introduction
 
   This is intended to be a minimal emacs starter kit for people doing academic writing with a combination of R, LaTeX, and/or markdown. I wrote this because I got tired of saying something along the lines of: "No, I don't use Rstudio. I use emacs, but it's kind of a pain to get set up..."
@@ -48,7 +48,7 @@ This is a *WORK-IN-PROGRESS* and may not work for you.
    
 * Usage
 
-  Many of Emacs' keybindings look something like =C-c= or =M-c=. The first says control-c, the second meta-c. The meta key is usually alt. =M-x= provides a searchable list of commands you can run, so if you can't remember the exact name, you can look it up using =M-x=. 
+  Many of Emacs' keybindings look something like =C-c= or =M-c=. The first says control-c, the second meta-c. The meta key is usually alt. =M-x= provides a searchable list of commands you can run, so if you can't remember the exact name, you can look it up using =M-x=. There is a general-purpose tutorial you can access with =C-h t=. It will teach you most of the basic commands necessary to move around inside Emacs. I highly recommend skimming through it. Some of the commands will be a little difference because this starter kit includes helm (which replaces much of Emacs' builtin file/command-finding interface). 
 
   You should be set up and ready to use Emacs for R, (r)markdown, latex, and git. Emacs will also support a lot of other programming languages out-of-the-box.
 
