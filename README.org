@@ -44,6 +44,7 @@ This is a *WORK-IN-PROGRESS* and may not work for you. I have tried to make this
 
    If you restart Emacs and are presented with an ugly screen with some links to a tutorial, walkthrough, and others, and NO errors, then everything has set up successfully! You're ready to go.
 
+*** Immediate customization
    You'll need to set up a few things like telling Emacs where your big =.bib= file is. All of these are in the =init-emacs.org= file near the top under the section "Your customizations". So, for example, to let Emacs know about your big bib file, you would change the value of the =my/bib-file-location= to wherever your bib file is located on your computer.
    
 * Usage
