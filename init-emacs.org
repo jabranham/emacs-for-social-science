@@ -54,6 +54,7 @@
     (delete-selection-mode) ; if I select something then type, delete it and replace it
     (use-package better-defaults
       :ensure t)
+    (menu-bar-mode) ; better-defaults disables this but it's useful when you're getting used to Emacs
     (setq scroll-conservatively 1000) ; when point moves offscreen, don't
                                       ; jump to recenter it
   #+END_SRC
