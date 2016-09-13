@@ -55,11 +55,47 @@ This is a *WORK-IN-PROGRESS* and may not work for you. I have tried to make this
 
   To open a file, do =C-x f=, which opens a buffer showing the files and folders of your current directory.You can open a file by selecting it (navigate up/down using the arrow keys or =C-p= / =C-n=). To go up a directory, hit =C-l=. To go down into a folder, have it selected and hit =C-j=. You can learn more basic Emacs functionality by going through the tutorial with =C-h t=.
 
-  =C-c C-r= will let you browse your bibliography from any window. You may also insert citations in latex and markdown using =C-c C-r=. 
+  =C-c C-r= will let you browse your bibliography from any window. You may also insert citations in latex and markdown using =C-c C-r=. This is due to =helm-bibtex=, which we set up in the [[file:init-emacs.org]] file. 
 
   Emacs thinks about "buffers" in terms of a major mode. So when you're editing an markdown file, emacs is in markdown-mode. You can learn about the current major mode, including useful keybindings, by pressing =C-h m= (=C-h= is help, then =m= for mode). So if you do that when you're editing an R script, you'll learn that =C-RET= (control-enter) is bound to =ess-eval-region-or-line-and-step=, which (as the function name suggests), will evaluate a region if selected. If not, it will evaluate the line that point (your cursor) is on, and then it will "step" (i.e. move to the next bit of code). 
 
-  If you want to learn about a function, you can press =C-h f=, and if you want to learn about a variable =C-h v=. 
+  If you want to learn about a function, you can press =C-h f=, and if you want to learn about a variable =C-h v=. Here's a quick list of the commands I use most frequently in the modes I've set up for you:
+
+** R (ESS)
+   ESS is short for Emacs Speaks Statistics and here are a handful of the most useful keybindings. If the name of the function isn't enough, you may type =C-h f= then the name of the function to find out what it does. Remember that there are tons more functions, most of which you can access and search with =M-x=, or learn about via =C-h m= (help mode) 
+
+| Keybinding | Function name                            |
+|------------+------------------------------------------|
+| C-RET      | ess-eval-region-or-line-and-step         |
+| C-M-x      | ess-eval-region-or-function-or-paragraph |
+| TAB        | ess-indent-or-complete                   |
+
+** Latex (AuCTeX)
+   AuCTeX rocks as a latex editor. Here are some of the more useful keybindings it gives you:
+
+| Keybinding | Function name      |
+|------------+--------------------|
+| C-c        | TeX-command-master |
+| C-c C-e    | LaTeX-environment  |
+| C-c C-m    | TeX-insert-macro   |
+
+** Markdown
+   Markdown is pretty easy to write in. Here's a few keybindings that I find useful:
+
+| Keybinding | Function name            |
+|------------+--------------------------|
+| C-c C-a f  | markdown-insert-footnote |
+| C-c C-l    | markdown-jump            |
+| C-c C-a l  | markdown-insert-link     |
+
+** Git (Magit)
+   When loading =magit=, I've bound =C-x g= to =magit-status= which is the starting point to your git experience inside Emacs. Once you're looking at the status of a repo, here are the most common commands:
+
+   - =s= stage selected file/hunk/region
+   - =c= open the commit popup, with details explaining commit options
+   - =P= open the push popup, with details explaining push options
+   - =f= open the fetch popup, with details explaining options
+   - =F= open the pull popup, with details explaining options 
 
 * Further customization 
 
@@ -69,4 +105,11 @@ This is a *WORK-IN-PROGRESS* and may not work for you. I have tried to make this
     (setq bibtex-completion-library-path "~/Dropbox/reference-pdfs")
   #+END_EXAMPLE
 
+* Other starter kits
+
+  I'm by no means the first person to write a starter kit. There are several others out there, all of which are awesome. Perhaps of most direct relevance here is:
   
+  - [[https://github.com/kjhealy/emacs-starter-kit][Kieran Healy's starter kit]], which is specifically aimed at social scientists working in markdown/R/latex/git. There are a few differences between this and that one:
+    - I don't include as many customizations. This is intentional - his probably works better out-of-the-box for many people, but I think that this one should be easier to understand and further customize.
+    - His is focused on macs whereas this starter kit supports Linux, Mac, and Windows OS's (BSD should also work but has not been tested)
+  - [[http://spacemacs.org/][Spacemacs]] is a community driven configuration. It is very powerful but super complicated - much more so than most people need. That said, if you're used to vim keybindings, this is probably the way to go
