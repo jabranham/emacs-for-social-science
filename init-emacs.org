@@ -68,7 +68,7 @@
   We also want words to wrap around nicely. The default behavior wraps in the middle of a word, which is awful:
 
   #+BEGIN_SRC emacs-lisp
-    (visual-line-mode)
+    (global-visual-line-mode)
   #+END_SRC
 
 ** Auto completion 
