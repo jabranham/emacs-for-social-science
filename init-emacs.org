@@ -121,12 +121,11 @@
        (add-hook 'prog-mode-hook #'flyspell-prog-mode))
    #+END_SRC
 * R (ESS)
-  ESS (short for Emacs Speaks Statistics) is the package that lets Emacs know about R and how it works. Let's load it up. No need to make sure that it is installed like we did with =use-package= in the previous section - =use-package= lets us just say "ensure" and will install it if it doesn't exist:
+  ESS (short for Emacs Speaks Statistics) is the package that lets Emacs know about R and how it works. Let's load it up. No need to make sure that it is installed like we did with =use-package= in the previous section - =use-package= lets us just say "ensure" and will install it if it doesn't exist:  
 
   #+BEGIN_SRC emacs-lisp
     (use-package ess-site
-      :ensure ess
-      )
+      :ensure ess)
   #+END_SRC
 
 * Latex (AuCTeX)
@@ -166,8 +165,7 @@
       :mode
       ("\\.Snw" . poly-noweb+r-mode)
       ("\\.Rnw" . poly-noweb+r-mode)
-      ("\\.Rmd" . poly-markdown+r-mode)
-      )
+      ("\\.Rmd" . poly-markdown+r-mode))
   #+END_SRC
 
 * Git (magit)
@@ -176,8 +174,7 @@
   #+BEGIN_SRC emacs-lisp
     (use-package magit
       :ensure t
-      :bind ("C-x g" . magit-status)
-      )
+      :bind ("C-x g" . magit-status))
   #+END_SRC
 
 * Helm 
