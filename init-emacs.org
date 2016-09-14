@@ -55,8 +55,7 @@
     (use-package better-defaults
       :ensure t)
     (menu-bar-mode) ; better-defaults disables this but it's useful when you're getting used to Emacs
-    (setq scroll-conservatively 1000) ; when point moves offscreen, don't
-                                      ; jump to recenter it
+    (setq scroll-conservatively 1000) ; when point moves offscreen, don't jump to recenter it
   #+END_SRC
 
   In my world, =C-z= is undo, not minimize emacs:
@@ -74,7 +73,6 @@
 ** Auto completion 
    We'll use =company= (short for "complete anything") to do auto-completion. This will, for example, enable the same kind of pop-up messages that mimic [[https://support.rstudio.com/hc/en-us/articles/205273297-Code-Completion][Rstudio's autocomplete features]]. As of this writing (August 2016), Emacs' autocompletion isn't quite as good as Rstudios. In particular, it won't pick up on variables from =data.frames= that you've passed to e.g. =dplyr= functions through piping calls. (e.g. ~mtcars %>% filter()~) won't give you =mpg= as an option inside the filter statement. Having said that, =company= does a really good job:
 
-
    #+BEGIN_SRC emacs-lisp
      (use-package company
        :ensure t
@@ -91,7 +89,6 @@
 
 ** Smartparens
    This package will help you deal with matching pairs (e.g. (), "", etc) by automatically inserting the closing pair when you open it and allowing you to "wrap" expressions that are selected (in other words, if you've already written something and you realize you want it in quotes/parens, just highlight it and press the " or ( ):
-
 
    #+BEGIN_SRC emacs-lisp
      (use-package smartparens-config
@@ -177,7 +174,6 @@
       :bind ("C-x g" . magit-status))
   #+END_SRC
 
-
 * Ivy
   Ivy is a completion framework that helps you find things (files, emacs commands, etc). We set it up here with a super minimal configuration because the reference 
 
@@ -189,7 +185,9 @@
   #+END_SRC
 
 * References & bibliographies 
-  This package configuration lets you type =C-c r= in a latex/markdown buffer to bring up a list of your references. You can then search through it til you find the one you want. Hitting =TAB= lets you decide what you want to do (e.g. insert a citation). =helm-bibtex= can also keep track of pdfs of articles and notes that you take pertaining to these articles. Since this is a "minimal" configuration, I don't set that up here. If you're interested, look at =bibtex-completion-library-path= and =bibtex-completion-notes-path=
+  This package configuration lets you type =C-c r=  to bring up a list of your references. You can then search through it til you find the one you want. Hitting =RET= inserts a citation. There are a few other things you can do besides inserting citations - have a look by highlighting a bib entry and pressing =M-o=. 
+
+=ivy-bibtex= can also keep track of pdfs of articles and notes that you take pertaining to these articles. Since this is a "minimal" configuration, I don't set that up here. If you're interested, look at =bibtex-completion-library-path= and =bibtex-completion-notes-path=
 
   #+BEGIN_SRC emacs-lisp
     (use-package ivy-bibtex
