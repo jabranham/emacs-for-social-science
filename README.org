@@ -45,7 +45,7 @@ This is a *WORK-IN-PROGRESS* and may not work for you. I have tried to make this
    If you restart Emacs and are presented with an ugly screen with some links to a tutorial, walkthrough, and others, and NO errors, then everything has set up successfully! You're ready to go.
 
 *** Immediate customization
-   You'll need to set up a few things like telling Emacs where your big =.bib= file is. All of these are in the =init-emacs.org= file near the top under the section "Your customizations". So, for example, to let Emacs know about your big bib file, you would change the value of the =my/bib-file-location= to wherever your bib file is located on your computer.
+    You'll need to set up a few things like telling Emacs where your big =.bib= file is. All of these are in the =init-emacs.org= file near the top under the section "Your customizations". So, for example, to let Emacs know about your big bib file, you would change the value of the =my/bib-file-location= to wherever your bib file is located on your computer.
    
 * Usage
 
@@ -55,48 +55,50 @@ This is a *WORK-IN-PROGRESS* and may not work for you. I have tried to make this
 
   To open a file, do =C-x f=, which opens a buffer showing the files and folders of your current directory.You can open a file by selecting it (navigate up/down using the arrow keys or =C-p= / =C-n=). To go up a directory, hit =C-l=. To go down into a folder, have it selected and hit =C-j=. You can learn more basic Emacs functionality by going through the tutorial with =C-h t=.
 
-  =C-c C-r= will let you browse and search your bibliography from any window. You may also insert citations in latex and markdown using =C-c C-r=, searching for the entry, then pressing =RET= (enter). This is due to =ivy-bibtex=, which we set up in the [[file:init-emacs.org]] file. 
-
   Emacs thinks about "buffers" in terms of a major mode. So when you're editing an markdown file, emacs is in markdown-mode. You can learn about the current major mode, including useful keybindings, by pressing =C-h m= (=C-h= is help, then =m= for mode). So if you do that when you're editing an R script, you'll learn that =C-RET= (control-enter) is bound to =ess-eval-region-or-line-and-step=, which (as the function name suggests), will evaluate a region if selected. If not, it will evaluate the line that point (your cursor) is on, and then it will "step" (i.e. move to the next bit of code). 
 
   If you want to learn about a function, you can press =C-h f=, and if you want to learn about a variable =C-h v=. Here's a quick list of the commands I use most frequently in the modes I've set up for you:
 
+** References
+   One of the best things about Emacs, compared to other editors (e.g. TeXStudio, RStudio, etc) is reference management for latex and markdown files. So long as you set up =my/bib-file-location= at the beginning of [[file:init-emacs.org]] to point to your big =.bib= file, this should work out-of-the-box for you. 
+
+   =C-c C-r= will let you browse and search your bibliography from any window. You may also insert citations in latex and markdown using =C-c C-r=, searching for the entry, then pressing =RET= (enter). This is due to =ivy-bibtex=, which we set up in the [[file:init-emacs.org]] file. You can do a few other things than simply inserting a citation; view your options by highlighting a reference and hitting =M-o= instead of =RET=. 
 ** R (ESS)
    ESS is short for Emacs Speaks Statistics and here are a handful of the most useful keybindings. If the name of the function isn't enough, you may type =C-h f= then the name of the function to find out what it does. Remember that there are tons more functions, most of which you can access and search with =M-x=, or learn about via =C-h m= (help mode).
 
-| Keybinding | Function name                            |
-|------------+------------------------------------------|
-| C-RET      | ess-eval-region-or-line-and-step         |
-| C-M-x      | ess-eval-region-or-function-or-paragraph |
-| TAB        | ess-indent-or-complete                   |
-| S-_        | ess-smart-S-assign                       |
+   | Keybinding | Function name                            |
+   |------------+------------------------------------------|
+   | C-RET      | ess-eval-region-or-line-and-step         |
+   | C-M-x      | ess-eval-region-or-function-or-paragraph |
+   | TAB        | ess-indent-or-complete                   |
+   | S-_        | ess-smart-S-assign                       |
 
 ** Latex (AuCTeX)
    AuCTeX rocks as a latex editor. Here are some of the more useful keybindings it gives you:
 
-| Keybinding | Function name      |
-|------------+--------------------|
-| C-c        | TeX-command-master |
-| C-c C-e    | LaTeX-environment  |
-| C-c C-m    | TeX-insert-macro   |
+   | Keybinding | Function name      |
+   |------------+--------------------|
+   | C-c        | TeX-command-master |
+   | C-c C-e    | LaTeX-environment  |
+   | C-c C-m    | TeX-insert-macro   |
 
 ** Markdown
    Markdown is pretty easy to write in. Here's a few keybindings that I find useful:
 
-| Keybinding | Function name            |
-|------------+--------------------------|
-| C-c C-a f  | markdown-insert-footnote |
-| C-c C-l    | markdown-jump            |
-| C-c C-a l  | markdown-insert-link     |
+   | Keybinding | Function name            |
+   |------------+--------------------------|
+   | C-c C-a f  | markdown-insert-footnote |
+   | C-c C-l    | markdown-jump            |
+   | C-c C-a l  | markdown-insert-link     |
 
 ** Rmarkdown/Rnw files (polymode)
    Emacs handles rmarkdown and Rnw (R + Latex) files with =polymode=. So the markdown (or latex) parts of the file will use markdown (or latex) mode, while the R portions will use R mode (with ESS). 
 
-| Keybinding | Function name           |
-|------------+-------------------------|
-| M-n C-n    | polymode-next-chunk     |
-| M-n C-p    | polymode-previous-chunk |
-| M-n e      | polymode-export         | 
+   | Keybinding | Function name           |
+   |------------+-------------------------|
+   | M-n C-n    | polymode-next-chunk     |
+   | M-n C-p    | polymode-previous-chunk |
+   | M-n e      | polymode-export         | 
   
 ** Git (Magit)
    When loading =magit=, I've bound =C-x g= to =magit-status= which is the starting point to your git experience inside Emacs. Once you're looking at the status of a repo, here are the most common commands:
@@ -119,9 +121,9 @@ This is a *WORK-IN-PROGRESS* and may not work for you. I have tried to make this
 ** Finding customizations
    You can check out everything that's customizable for each mode via =M-x customize-group= and entering the group you want. Or, alternatively, do =C-h v= ("help variable") and search for a variable you think might exist. So, if you're annoyed that ESS asks you for a starting directory every time you start it, you could do =C-h v ess dir= which shows you that =ess-ask-for-ess-directory= is a variable. It's documentation says that if it's non-nil ESS asks for a directory. So if you don't want that, you just need to set the value of that variable to nil in your [[file:init-emacs.org]] file. I'd do it under the =:config= part of =use-package ess-site= with something like this:
 
-#+BEGIN_EXAMPLE
+   #+BEGIN_EXAMPLE
 (setq ess-ask-for-ess-directory nil)
-#+END_EXAMPLE
+   #+END_EXAMPLE
 
 * Other starter kits
 
