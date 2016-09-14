@@ -1,0 +1,9 @@
+/init-emacs.el
+elpa/
+/elpa/archives/elpa/archive-contents
+backups/*
+/backups/!home!alex!.emacs.d!elpa!async-20160711.2235!async-autoloads.el~
+auto-save-list/*
+/places
+/ido.last
+/abbrev_defs
