@@ -89,7 +89,7 @@ This is a *WORK-IN-PROGRESS* and may not work for you. I have tried to make this
 | C-c C-l    | markdown-jump            |
 | C-c C-a l  | markdown-insert-link     |
 
-** Rmarkdown/Rnw files
+** Rmarkdown/Rnw files (polymode)
    Emacs handles rmarkdown and Rnw (R + Latex) files with =polymode=. So the markdown (or latex) parts of the file will use markdown (or latex) mode, while the R portions will use R mode (with ESS). 
 
 | Keybinding | Function name           |
@@ -134,7 +134,7 @@ This is a *WORK-IN-PROGRESS* and may not work for you. I have tried to make this
 
 * Troubleshooting
   
-  Emacs is a computer program, and there are always problems with computer programs! I use a Linux distribution and so have tested this pretty thoroughly there. It should work fine. I have loaded it on Windows as well and it should work, subject to the caveats below. I haven't tested in on a Mac (don't have access), but there's no reason it shouldn't work there just fine. If you run into trouble, read this section. If you still can't get something to work, please open an issue on github. 
+  Emacs is a computer program, and there are always problems with computer programs! I use a Linux distribution and so have tested this pretty thoroughly there. It should work fine. I have loaded it on Windows as well and it should work. I haven't tested in on a Mac (don't have access), but there's no reason it shouldn't work there just fine. If you run into trouble, read this section. If you still can't get something to work, please open an issue on github. 
 
 ** Mac
    If a program will work in the terminal for you but not from Emacs, this may fix it. Simply copy/paste into [[file:init-emacs.org]]:
