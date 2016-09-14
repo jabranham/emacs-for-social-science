@@ -106,16 +106,14 @@
    #+END_SRC
    
 ** Spell check 
-   We can use =flyspell= for on-the-fly spell checking, similar to what we get with MS Word or whatever.
+   We can use =flyspell= for on-the-fly spell checking, similar to what we get with MS Word or whatever. =C-;= runs =flyspell-auto-correct-previous-word= which automatically corrects the last word still on screen. If it doesn't guess right the first time, press it again. 
    #+BEGIN_SRC emacs-lisp
      (use-package flyspell
        :ensure t
-       :init
-       (autoload 'flyspell-mode "flyspell" "On-the-fly spelling checker." t)
        :config
-       ;; (setq ispell-list-command "--list")
        (add-hook 'text-mode-hook #'turn-on-flyspell)
-       (add-hook 'prog-mode-hook #'flyspell-prog-mode))
+       (add-hook 'prog-mode-hook #'flyspell-prog-mode)
+       (add-hook 'ess-mode-hook #'flyspell-prog-mode))
    #+END_SRC
 * R (ESS)
   ESS (short for Emacs Speaks Statistics) is the package that lets Emacs know about R and how it works. Let's load it up. No need to make sure that it is installed like we did with =use-package= in the previous section - =use-package= lets us just say "ensure" and will install it if it doesn't exist:  
