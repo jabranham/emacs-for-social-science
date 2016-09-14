@@ -177,49 +177,39 @@
       :bind ("C-x g" . magit-status))
   #+END_SRC
 
-* Helm 
-  "[[https://emacs-helm.github.io/helm/][Helm]] is an Emacs framework for incremental completions and narrowing selections. It helps to rapidly complete file names, buffer names, or any other Emacs interactions requiring selecting an item from a list of possible choices."
 
-  Of course, Emacs has something like that built-in. It's called =ido= (interactively do things) and it works just fine. I prefer helm, but that's a matter of personal opinion. Why, then, am I including helm in this supposedly /minimal/ Emacs configuration? Simple: =helm-bibtex=. =helm-bibtex= lets you search and manage your BibTeX bib files super easily. You can also easily select entries and insert properly-formatted citations in both latex and (r)markdown.
-
+* Ivy
+  Ivy is a completion framework that helps you find things (files, emacs commands, etc). We set it up here with a super minimal configuration because the reference 
 
   #+BEGIN_SRC emacs-lisp
-    (use-package helm-config
-      :ensure helm
-      :bind
-      ("C-c h" . helm-command-prefix)
-      ("M-x" . helm-M-x)
-      ("M-y" . helm-show-kill-ring)
-      ("C-x b" . helm-mini)
-      ("C-x C-f" . helm-find-files)
-      ("C-x f" . helm-find-files)
-      ("C-M-z" . helm-resume)
-      ("C-M-g" . helm-google-suggest)
-      :init
-        (progn
-        (helm-mode 1)
-        (helm-adaptive-mode 1)
-        (helm-push-mark-mode 1))
+    (use-package ivy
+      :ensure t
       :config
-      (define-key global-map [remap list-buffers] 'helm-buffers-list)
-      (define-key global-map [remap dabbrev-expand] 'helm-dabbrev)
-      (define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action) ; rebind tab to do persistent action
-      (define-key helm-map (kbd "C-i") 'helm-execute-persistent-action) ; make TAB works in terminal
-      (define-key helm-map (kbd "C-z")  'helm-select-action) ; list actions using C-z
-      (setq helm-split-window-in-side-p t)
-      (setq helm-ff-file-name-history-use-recentf t)
-      (setq helm-mode-fuzzy-match t)
-      (setq helm-completion-in-region-fuzzy-match t))
+      (ivy-mode 1))
   #+END_SRC
 
 * References & bibliographies 
   This package configuration lets you type =C-c r= in a latex/markdown buffer to bring up a list of your references. You can then search through it til you find the one you want. Hitting =TAB= lets you decide what you want to do (e.g. insert a citation). =helm-bibtex= can also keep track of pdfs of articles and notes that you take pertaining to these articles. Since this is a "minimal" configuration, I don't set that up here. If you're interested, look at =bibtex-completion-library-path= and =bibtex-completion-notes-path=
 
   #+BEGIN_SRC emacs-lisp
-    (use-package helm-bibtex
+    (use-package ivy-bibtex
       :ensure t
       :config 
       (setq bibtex-completion-bibliography my/bib-file-location)
-      (bind-key* "C-c C-r" #'helm-bibtex))
-  #+END_SRC
+      (bind-key* "C-c C-r" #'ivy-bibtex)
+      ;; The default action is to view pdf, here we change that to insert citation
+      ;; code from https://github.com/tmalsburg/helm-bibtex
+      (defun ivy-bibtex (&optional arg)
+      "Search BibTeX entries using ivy.
 
+    With a prefix ARG the cache is invalidated and the bibliography
+    reread."
+      (interactive "P")
+      (when arg
+        (setq bibtex-completion-bibliography-hash ""))
+      (bibtex-completion-init)
+      (ivy-read "BibTeX Items: "
+                (bibtex-completion-candidates 'ivy-bibtex-candidates-formatter)
+                :caller 'ivy-bibtex
+                :action 'bibtex-completion-insert-citation)))
+  #+END_SRC
