@@ -116,6 +116,13 @@ This is a *WORK-IN-PROGRESS* and may not work for you. I have tried to make this
     (setq bibtex-completion-library-path "~/Dropbox/reference-pdfs")
   #+END_EXAMPLE
 
+** Finding customizations
+   You can check out everything that's customizable for each mode via =M-x customize-group= and entering the group you want. Or, alternatively, do =C-h v= ("help variable") and search for a variable you think might exist. So, if you're annoyed that ESS asks you for a starting directory every time you start it, you could do =C-h v ess dir= which shows you that =ess-ask-for-ess-directory= is a variable. It's documentation says that if it's non-nil ESS asks for a directory. So if you don't want that, you just need to set the value of that variable to nil in your [[file:init-emacs.org]] file. I'd do it under the =:config= part of =use-package ess-site= with something like this:
+
+#+BEGIN_EXAMPLE
+(setq ess-ask-for-ess-directory nil)
+#+END_EXAMPLE
+
 * Other starter kits
 
   I'm by no means the first person to write a starter kit. There are several others out there, all of which are awesome. Perhaps of most direct relevance here are:
