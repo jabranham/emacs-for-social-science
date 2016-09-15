@@ -211,3 +211,14 @@
                 :caller 'ivy-bibtex
                 :action 'bibtex-completion-insert-citation)))
   #+END_SRC
+* Fix for Mac
+  Emacs on Mac sometimes can't find installed programs (e.g. R, spellcheck). This fixes that:
+
+  #+BEGIN_SRC emacs-lisp
+    (when (memq window-system '(mac ns))
+      (use-package exec-path-from-shell
+        :ensure t
+        :config
+        (exec-path-from-shell-initialize)))
+  #+END_SRC
+
