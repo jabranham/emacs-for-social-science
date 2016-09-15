@@ -139,5 +139,12 @@ This is a *WORK-IN-PROGRESS* and may not work for you. I have tried to make this
   
   Emacs is a computer program, and there are always problems with computer programs! I use a Linux distribution and so have tested this pretty thoroughly there. It should work fine. I have loaded it on Windows as well and it should work. I haven't tested in on a Mac (don't have access), but there's no reason it shouldn't work there just fine. If you run into trouble, read this section. If you still can't get something to work, please open an issue on github. 
 
+** Mac
+   Macs do not come with a spell checking program installed that Emacs can use. You'll need to install one - either hunspell or aspell. The recommended way is with [[http://brew.sh/][homebrew]]:
+
+   #+BEGIN_EXAMPLE
+     brew install hunspell
+   #+END_EXAMPLE
+
 ** Windows
    Windows is... a tedious operating system. Emacs has a whole FAQ set up [[https://www.gnu.org/software/emacs/manual/html_mono/efaq-w32.html][here]] that may help you find a solution to your problem. 
