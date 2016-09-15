@@ -56,6 +56,8 @@
       :ensure t)
     (menu-bar-mode) ; better-defaults disables this but it's useful when you're getting used to Emacs
     (setq scroll-conservatively 1000) ; when point moves offscreen, don't jump to recenter it
+    (setq visible-bell nil) ; fix for bug in Mac, see http://stuff-things.net/2015/10/05/emacs-visible-bell-work-around-on-os-x-el-capitan/
+    (setq ring-bell-function 'ignore)
   #+END_SRC
 
   In my world, =C-z= is undo, not minimize emacs:
