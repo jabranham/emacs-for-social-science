@@ -72,6 +72,7 @@ This is a *WORK-IN-PROGRESS* and may not work for you. I have tried to make this
    | C-M-x      | ess-eval-region-or-function-or-paragraph |
    | TAB        | ess-indent-or-complete                   |
    | S-_        | ess-smart-S-assign                       |
+   |            | ess-rdired (for listing R objects)       |
 
 ** Latex (AuCTeX)
    AuCTeX rocks as a latex editor. Here are some of the more useful keybindings it gives you:
