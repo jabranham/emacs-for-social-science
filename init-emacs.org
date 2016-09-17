@@ -72,6 +72,16 @@
     (global-visual-line-mode)
   #+END_SRC
 
+** Fix for Mac
+   Emacs on Mac sometimes can't find installed programs (e.g. R, spellcheck). This fixes that:
+
+   #+BEGIN_SRC emacs-lisp
+     (when (memq window-system '(mac ns))
+       (use-package exec-path-from-shell
+         :ensure t
+         :config
+         (exec-path-from-shell-initialize)))
+   #+END_SRC
 ** Auto completion 
    We'll use =company= (short for "complete anything") to do auto-completion. This will, for example, enable the same kind of pop-up messages that mimic [[https://support.rstudio.com/hc/en-us/articles/205273297-Code-Completion][Rstudio's autocomplete features]]. As of this writing (August 2016), Emacs' autocompletion isn't quite as good as Rstudios. In particular, it won't pick up on variables from =data.frames= that you've passed to e.g. =dplyr= functions through piping calls. (e.g. ~mtcars %>% filter()~) won't give you =mpg= as an option inside the filter statement. Having said that, =company= does a really good job:
 
@@ -210,15 +220,5 @@
                 (bibtex-completion-candidates 'ivy-bibtex-candidates-formatter)
                 :caller 'ivy-bibtex
                 :action 'bibtex-completion-insert-citation)))
-  #+END_SRC
-* Fix for Mac
-  Emacs on Mac sometimes can't find installed programs (e.g. R, spellcheck). This fixes that:
-
-  #+BEGIN_SRC emacs-lisp
-    (when (memq window-system '(mac ns))
-      (use-package exec-path-from-shell
-        :ensure t
-        :config
-        (exec-path-from-shell-initialize)))
   #+END_SRC
 
