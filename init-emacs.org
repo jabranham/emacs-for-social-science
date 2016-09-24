@@ -195,7 +195,7 @@
   #+END_SRC
 
 * References & bibliographies 
-  This package configuration lets you type =C-c r=  to bring up a list of your references. You can then search through it til you find the one you want. Hitting =RET= inserts a citation. There are a few other things you can do besides inserting citations - have a look by highlighting a bib entry and pressing =M-o=. 
+  This package configuration lets you type =C-c C-r=  to bring up a list of your references. You can then search through it til you find the one you want. Hitting =RET= inserts a citation. There are a few other things you can do besides inserting citations - have a look by highlighting a bib entry and pressing =M-o=. 
 
 =ivy-bibtex= can also keep track of pdfs of articles and notes that you take pertaining to these articles. Since this is a "minimal" configuration, I don't set that up here. If you're interested, look at =bibtex-completion-library-path= and =bibtex-completion-notes-path=
 
