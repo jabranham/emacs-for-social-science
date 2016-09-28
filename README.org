@@ -18,7 +18,8 @@ This is a *WORK-IN-PROGRESS* and may not work for you. I have tried to make this
 *** Windows 
     These instructions are a condensed version of the official README. If you run into problems, consult the README:
     1. Go to [[http://ftp.gnu.org/gnu/emacs/windows/][this website]]
-    2. Download the latest version of Emacs (24.5 as of this writing)
+    2. Download the latest version of Emacs (25.1 as of this writing)
+       1. If you run a 64-bit system (you probably do), select the 64-bit version. For Emacs 25.1 that's =emacs-25.1-x86_64-w64-mingw32.zip=
     3. Unzip that file into a directory where you want to install Emacs (=C:\Program Files=, for example)
     4. Run the =runemacs.exe= file inside the newly-created =bin= folder
        1. Optionally, you can add Emacs to the start menu by running the =addpm.exe= file
