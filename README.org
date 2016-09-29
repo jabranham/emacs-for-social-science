@@ -54,7 +54,7 @@ This is a *WORK-IN-PROGRESS* and may not work for you. I have tried to make this
 
   You should be set up and ready to use Emacs for R, (r)markdown, latex, and git. Emacs will also support a lot of other programming languages out-of-the-box.
 
-  To open a file, do =C-x f=, which opens a buffer showing the files and folders of your current directory.You can open a file by selecting it (navigate up/down using the arrow keys or =C-p= / =C-n=). To go up a directory, hit =C-l=. To go down into a folder, have it selected and hit =C-j=. You can learn more basic Emacs functionality by going through the tutorial with =C-h t=.
+  To open a file, do =C-x C-f=, which opens a buffer showing the files and folders of your current directory.You can open a file by selecting it (navigate up/down using the arrow keys or =C-p= / =C-n=). To go up a directory, hit =C-l=. To go down into a folder, have it selected and hit =C-j=. You can learn more basic Emacs functionality by going through the tutorial with =C-h t=.
 
   Emacs thinks about "buffers" in terms of a major mode. So when you're editing an markdown file, emacs is in markdown-mode. You can learn about the current major mode, including useful keybindings, by pressing =C-h m= (=C-h= is help, then =m= for mode). So if you do that when you're editing an R script, you'll learn that =C-RET= (control-enter) is bound to =ess-eval-region-or-line-and-step=, which (as the function name suggests), will evaluate a region if selected. If not, it will evaluate the line that point (your cursor) is on, and then it will "step" (i.e. move to the next bit of code). 
 
