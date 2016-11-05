@@ -103,10 +103,12 @@
    This package will help you deal with matching pairs (e.g. (), "", etc) by automatically inserting the closing pair when you open it and allowing you to "wrap" expressions that are selected (in other words, if you've already written something and you realize you want it in quotes/parens, just highlight it and press the " or ( ):
 
    #+BEGIN_SRC emacs-lisp
-     (use-package smartparens-config
-       :ensure smartparens
+     (use-package smartparens
+       :ensure t
        :init
-       (smartparens-global-mode))
+       (require 'smartparens-config)
+       (smartparens-global-mode)
+       (show-smartparens-global-mode))
    #+END_SRC
 
 ** Backup files
