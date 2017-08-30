@@ -60,9 +60,9 @@
 
   In my world, =C-z= is undo, not minimize emacs:
 
-  #+BEGIN_SRC emacs-lisp
-    (global-set-key (kbd "C-z") #'undo)
-  #+END_SRC
+#+BEGIN_SRC emacs-lisp
+  (bind-key "C-z" #'undo)
+#+END_SRC
 
   We also want words to wrap around nicely. The default behavior wraps in the middle of a word, which is awful:
 
