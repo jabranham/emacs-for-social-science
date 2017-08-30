@@ -206,14 +206,13 @@ This package configuration lets you type =C-c C-r=  to bring up a list of your r
 
 =ivy-bibtex= can also keep track of pdfs of articles and notes that you take pertaining to these articles. Since this is a "minimal" configuration, I don't set that up here. If you're interested, look at =bibtex-completion-library-path= and =bibtex-completion-notes-path=
 
-  #+BEGIN_SRC emacs-lisp
-    (use-package ivy-bibtex
-      :ensure t
-      :config 
-      (setq bibtex-completion-bibliography my/bib-file-location)
-      (bind-key* "C-c C-r" #'ivy-bibtex)
-      ;; default is to open pdf - change that to insert citation
-      (setq ivy-bibtex-default-action #'ivy-bibtex-insert-citation)
-      )
-  #+END_SRC
-
+#+BEGIN_SRC emacs-lisp
+  (use-package ivy-bibtex
+    :ensure t
+    :bind*
+    ("C-c C-r" . ivy-bibtex)
+    :config
+    (setq bibtex-completion-bibliography my/bib-file-location)
+    ;; default is to open pdf - change that to insert citation
+    (setq ivy-bibtex-default-action #'ivy-bibtex-insert-citation))
+#+END_SRC
