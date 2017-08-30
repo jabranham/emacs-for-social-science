@@ -46,31 +46,31 @@ This section sets up emacs' package management system. MELPA and ELPA are the tw
 
 #+END_SRC
 * Dealing with default emacs
-  Emacs was created probably before you were born, which makes it super ancient in computer terms. In this section, we override some of the (now) silly default behavior so that emacs acts more like we expect a program to act in the 21st century. We'll load up some better default settings, activate auto-completion, and enable a smart way of dealing with pairs (e.g. parentheses, quotes, etc)
+Emacs was created probably before you were born, which makes it super ancient in computer terms. In this section, we override some of the (now) silly default behavior so that emacs acts more like we expect a program to act in the 21st century. We'll load up some better default settings, activate auto-completion, and enable a smart way of dealing with pairs (e.g. parentheses, quotes, etc)
 
-  In particular, we load =better-defaults=, a package that selects some better default settings for Emacs. it you're interested what it does, you can look at it [[https://github.com/technomancy/better-defaults][on github]]:
+In particular, we load =better-defaults=, a package that selects some better default settings for Emacs. it you're interested what it does, you can look at it [[https://github.com/technomancy/better-defaults][on github]]:
 
-  #+BEGIN_SRC emacs-lisp
-    (delete-selection-mode) ; if I select something then type, delete it and replace it
-    (use-package better-defaults
-      :ensure t)
-    (menu-bar-mode) ; better-defaults disables this but it's useful when you're getting used to Emacs
-    (setq scroll-conservatively 1000) ; when point moves offscreen, don't jump to recenter it
-    (setq visible-bell nil) ; fix for bug in Mac, see http://stuff-things.net/2015/10/05/emacs-visible-bell-work-around-on-os-x-el-capitan/
-    (setq ring-bell-function 'ignore)
-  #+END_SRC
+#+BEGIN_SRC emacs-lisp
+  (delete-selection-mode) ; if I select something then type, delete it and replace it
+  (use-package better-defaults
+    :ensure t)
+  (menu-bar-mode) ; better-defaults disables this but it's useful when you're getting used to Emacs
+  (setq scroll-conservatively 1000) ; when point moves offscreen, don't jump to recenter it
+  (setq visible-bell nil) ; fix for bug in Mac, see http://stuff-things.net/2015/10/05/emacs-visible-bell-work-around-on-os-x-el-capitan/
+  (setq ring-bell-function 'ignore)
+#+END_SRC
 
-  In my world, =C-z= is undo, not minimize emacs:
+In my world, =C-z= is undo, not minimize emacs:
 
 #+BEGIN_SRC emacs-lisp
   (bind-key "C-z" #'undo)
 #+END_SRC
 
-  We also want words to wrap around nicely. The default behavior wraps in the middle of a word, which is awful:
+We also want words to wrap around nicely. The default behavior wraps in the middle of a word, which is awful:
 
-  #+BEGIN_SRC emacs-lisp
-    (global-visual-line-mode)
-  #+END_SRC
+#+BEGIN_SRC emacs-lisp
+  (global-visual-line-mode)
+#+END_SRC
 
 ** Fix for Mac
    Emacs on Mac sometimes can't find installed programs (e.g. R, spellcheck). This fixes that:
