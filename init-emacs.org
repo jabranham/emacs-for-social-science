@@ -166,24 +166,20 @@ If you use latex to do any writing, you'll be happy to know that emacs is the hi
 #+END_SRC
 
 * Markdown
-  Markdown is a good way to write up most things, though it doesn't hold a candle to emacs's built-in org-mode:
+Markdown is a good way to write up most things, though it doesn't hold a candle to emacs's built-in org-mode.
 
-  #+BEGIN_SRC emacs-lisp
-    (use-package markdown-mode
-      :ensure t)
-  #+END_SRC
+We can use it with rmarkdown files too.
+You can type =C-c '= to open a code buffer inside an R code block.
 
-* Rmarkdown/knitr (polymode)
-  Polymode is a package that lets us use emacs to edit rmarkdown and sweave-type files that combine markdown or latex with R code. Let's load it up and make it aware of the file extensions:
-
-  #+BEGIN_SRC emacs-lisp
-    (use-package polymode
-      :ensure t
-      :mode
-      ("\\.Snw" . poly-noweb+r-mode)
-      ("\\.Rnw" . poly-noweb+r-mode)
-      ("\\.Rmd" . poly-markdown+r-mode))
-  #+END_SRC
+#+BEGIN_SRC emacs-lisp
+  (use-package markdown-mode
+    :ensure t
+    :mode
+    (("README\\.md\\'" . gfm-mode)
+     ("\\.md\\'" . markdown-mode)
+     ("\\.Rmd\\'" . markdown-mode)
+     ("\\.markdown\\'" . markdown-mode)))
+#+END_SRC
 
 * Git (magit)
 Magit is an Emacs package that makes dealing with git awesome.
