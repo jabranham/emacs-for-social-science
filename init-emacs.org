@@ -1,48 +1,50 @@
 #+TITLE: Emacs configuration
 * Your customizations
-  You will need to tell Emacs a little about your particular setup:
+You will need to tell Emacs a little about your particular setup:
 
-  First, let Emacs know where it is you keep your =.bib= file:
+First, let Emacs know where it is you keep your master =.bib= file:
 
 #+BEGIN_SRC emacs-lisp
   (defvar my/bib-file-location "~/references.bib"
     "Where I keep my bib file.")
 #+END_SRC
 * Emacs package management
+This section sets up emacs' package management system. MELPA and ELPA are the two biggest repos for packages. Windows is a pain because it doesn't work well with =https= so we have to fallback to =http=. The second thing we do here is to make sure that [[https://github.com/jwiegley/use-package][use-package]] is installed:
 
-  #+BEGIN_SRC emacs-lisp
-    (require 'package)
-    (setq package-enable-at-startup nil)
+#+BEGIN_SRC emacs-lisp
+  (require 'package)
+  (setq package-enable-at-startup nil)
 
-    ;; Windows has issues using https:// instead of http:// so we want to
-    ;; set the package locations to use the secure connection when they
-    ;; can:
-    (cond
-     ((string-equal system-type "windows-nt") ; Microsoft Windows
-      (progn
-        (setq package-archives
-              '(("melpa" . "http://melpa.org/packages/")
-                ("elpa" . "http://elpa.gnu.org/packages/")))))
-     ((or (string-equal system-type "gnu/linux") (string-equal system-type "darwin")) ; Linux & Mac OS X
-      (progn
-        (setq package-archives
-              '(("melpa" . "https://melpa.org/packages/")
-                ("elpa" . "https://elpa.gnu.org/packages/"))))))
+  ;; Windows has issues using https:// instead of http:// so we want to
+  ;; set the package locations to use the secure connection when they
+  ;; can:
+  (cond
+   ((string-equal system-type "windows-nt") ; Microsoft Windows
+    (progn
+      (setq package-archives
+            '(("melpa" . "http://melpa.org/packages/")
+              ("elpa" . "http://elpa.gnu.org/packages/")))))
+   ((or (string-equal system-type "gnu/linux") ; Linux
+        (string-equal system-type "darwin")) ; & Mac OS X
+    (progn
+      (setq package-archives
+            '(("melpa" . "https://melpa.org/packages/")
+              ("elpa" . "https://elpa.gnu.org/packages/"))))))
 
-    (package-initialize)
+  (package-initialize)
 
-    ;; We'll use the use-package package to mange our config. Make sure
-    ;; it's installed:
-    (unless (package-installed-p 'use-package)
-      (package-refresh-contents)
-      (package-install 'use-package))
+  ;; We'll use the use-package package to mange our config. Make sure
+  ;; it's installed:
+  (unless (package-installed-p 'use-package)
+    (package-refresh-contents)
+    (package-install 'use-package))
 
-    ;; Make use-package available for use:
-    (eval-when-compile
-      (require 'use-package))
-    (require 'bind-key)
+  ;; Make use-package available for use:
+  (eval-when-compile
+    (require 'use-package))
+  (require 'bind-key)
 
-  #+END_SRC
+#+END_SRC
 * Dealing with default emacs
   Emacs was created probably before you were born, which makes it super ancient in computer terms. In this section, we override some of the (now) silly default behavior so that emacs acts more like we expect a program to act in the 21st century. We'll load up some better default settings, activate auto-completion, and enable a smart way of dealing with pairs (e.g. parentheses, quotes, etc)
 
