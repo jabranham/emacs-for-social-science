@@ -8,31 +8,11 @@ First, let Emacs know where it is you keep your master =.bib= file:
   (defvar my/bib-file-location "~/references.bib"
     "Where I keep my bib file.")
 #+END_SRC
-* Emacs package management
-This section sets up emacs' package management system. MELPA and ELPA are the two biggest repos for packages. Windows is a pain because it doesn't work well with =https= so we have to fallback to =http=. The second thing we do here is to make sure that [[https://github.com/jwiegley/use-package][use-package]] is installed:
+* Use-package
+We'll use the excellent use-package package to manage packages.
+We need to make sure it's installed, though:
 
 #+BEGIN_SRC emacs-lisp
-  (require 'package)
-  (setq package-enable-at-startup nil)
-
-  ;; Windows has issues using https:// instead of http:// so we want to
-  ;; set the package locations to use the secure connection when they
-  ;; can:
-  (cond
-   ((string-equal system-type "windows-nt") ; Microsoft Windows
-    (progn
-      (setq package-archives
-            '(("melpa" . "http://melpa.org/packages/")
-              ("elpa" . "http://elpa.gnu.org/packages/")))))
-   ((or (string-equal system-type "gnu/linux") ; Linux
-        (string-equal system-type "darwin")) ; & Mac OS X
-    (progn
-      (setq package-archives
-            '(("melpa" . "https://melpa.org/packages/")
-              ("elpa" . "https://elpa.gnu.org/packages/"))))))
-
-
-
   ;; We'll use the use-package package to mange our config. Make sure
   ;; it's installed:
   (unless (package-installed-p 'use-package)
