@@ -4,13 +4,11 @@
 
   First, let Emacs know where it is you keep your =.bib= file:
 
-
-  #+BEGIN_SRC emacs-lisp
-    (defvar my/bib-file-location "~/Dropbox/bibliography/references.bib"
-      "Where I keep my bib file.")
-  #+END_SRC
+#+BEGIN_SRC emacs-lisp
+  (defvar my/bib-file-location "~/references.bib"
+    "Where I keep my bib file.")
+#+END_SRC
 * Emacs package management
-  This section sets up emacs' package management system. MELPA and ELPA are the two biggest repos for packages. Windows is a pain because it doesn't work well with =https= so we have to fallback to =http=. The second thing we do here is to make sure that [[https://github.com/jwiegley/use-package][use-package]] is installed:
 
   #+BEGIN_SRC emacs-lisp
     (require 'package)
