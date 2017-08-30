@@ -70,6 +70,7 @@ We'll use =company= (short for "complete anything") to do auto-completion. This 
 #+BEGIN_SRC emacs-lisp
   (use-package company
     :ensure t
+    :demand t
     :bind
     (:map company-active-map
           ("<tab>" . company-complete-common-or-cycle))
