@@ -15,7 +15,7 @@
 
 (if (version< emacs-version "24.5.1"); Minimum version is emacs 24.5.1
     (error "Your Emacs is too old -- this config requires v%s or higher"))
-
+(package-initialize)
 (require 'org)
 (org-babel-load-file (concat user-emacs-directory "init-emacs.org"))
 

@@ -31,7 +31,7 @@ This section sets up emacs' package management system. MELPA and ELPA are the tw
             '(("melpa" . "https://melpa.org/packages/")
               ("elpa" . "https://elpa.gnu.org/packages/"))))))
 
-  (package-initialize)
+
 
   ;; We'll use the use-package package to mange our config. Make sure
   ;; it's installed:
