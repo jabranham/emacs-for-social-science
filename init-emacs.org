@@ -73,22 +73,6 @@ We also want words to wrap around nicely. The default behavior wraps in the midd
 #+END_SRC
 
 ** Fix for Mac
-** Auto completion 
-   We'll use =company= (short for "complete anything") to do auto-completion. This will, for example, enable the same kind of pop-up messages that mimic [[https://support.rstudio.com/hc/en-us/articles/205273297-Code-Completion][Rstudio's autocomplete features]]. As of this writing (August 2016), Emacs' autocompletion isn't quite as good as Rstudios. In particular, it won't pick up on variables from =data.frames= that you've passed to e.g. =dplyr= functions through piping calls. (e.g. ~mtcars %>% filter()~) won't give you =mpg= as an option inside the filter statement. Having said that, =company= does a really good job:
-
-   #+BEGIN_SRC emacs-lisp
-     (use-package company
-       :ensure t
-       :config
-       (add-hook 'after-init-hook #'global-company-mode)
-       :config
-       (define-key company-active-map (kbd "<tab>")
-         (lambda () (interactive) (company-complete-common-or-cycle 1)))
-       (use-package company-quickhelp
-         :ensure t
-         :config
-         (company-quickhelp-mode 1)))
-   #+END_SRC
 Emacs on Mac sometimes can't find installed programs (e.g. R, spellcheck).
 This fixes that by making Emacs know about the same PATH as the rest of the system.
 
@@ -100,64 +84,86 @@ This fixes that by making Emacs know about the same PATH as the rest of the syst
     (exec-path-from-shell-initialize))
 #+END_SRC
 
+** Auto completion
+We'll use =company= (short for "complete anything") to do auto-completion. This will, for example, enable the same kind of pop-up messages that mimic [[https://support.rstudio.com/hc/en-us/articles/205273297-Code-Completion][Rstudio's autocomplete features]]. As of this writing (August 2016), Emacs' autocompletion isn't quite as good as Rstudios. In particular, it won't pick up on variables from =data.frames= that you've passed to e.g. =dplyr= functions through piping calls. (e.g. ~mtcars %>% filter()~) won't give you =mpg= as an option inside the filter statement. Having said that, =company= does a really good job:
+
+#+BEGIN_SRC emacs-lisp
+  (use-package company
+    :ensure t
+    :bind
+    (:map company-active-map
+          ("<tab>" . company-complete-common-or-cycle))
+    :config
+    (add-hook 'after-init-hook #'global-company-mode)
+    :config
+    (use-package company-quickhelp
+      :ensure t
+      :config
+      (company-quickhelp-mode 1)))
+#+END_SRC
 
 ** Smartparens
-   This package will help you deal with matching pairs (e.g. (), "", etc) by automatically inserting the closing pair when you open it and allowing you to "wrap" expressions that are selected (in other words, if you've already written something and you realize you want it in quotes/parens, just highlight it and press the " or ( ):
+This package will help you deal with matching pairs (e.g. (), "", etc) by automatically inserting the closing pair when you open it and allowing you to "wrap" expressions that are selected (in other words, if you've already written something and you realize you want it in quotes/parens, just highlight it and press the " or ( ):
 
-   #+BEGIN_SRC emacs-lisp
-     (use-package smartparens
-       :ensure t
-       :init
-       (require 'smartparens-config)
-       (smartparens-global-mode)
-       (show-smartparens-global-mode))
-   #+END_SRC
+#+BEGIN_SRC emacs-lisp
+  (use-package smartparens-config
+    :ensure smartparens
+    :ensure t
+    :config
+    (smartparens-global-mode)
+    (show-smartparens-global-mode))
+#+END_SRC
 
 ** Backup files
-   I want emacs to make these, but don't want to clutter up my project folders with tons of backup files. Solution: put them in the ~.emacs.d/~ directory.
-   #+BEGIN_SRC emacs-lisp
-     (setq backup-directory-alist
-           `(("." . ,(expand-file-name
-                      (concat user-emacs-directory "backups")))))
-   #+END_SRC
+I want emacs to make these, but don't want to clutter up my project folders with tons of backup files. Solution: put them in the ~.emacs.d/~ directory.
+#+BEGIN_SRC emacs-lisp
+  (setq backup-directory-alist
+        `(("." . ,(expand-file-name
+                   (concat user-emacs-directory "backups")))))
+#+END_SRC
    
 ** Spell check 
-   We can use =flyspell= for on-the-fly spell checking, similar to what we get with MS Word or whatever. =C-;= runs =flyspell-auto-correct-previous-word= which automatically corrects the last word still on screen. If it doesn't guess right the first time, press it again. 
-   #+BEGIN_SRC emacs-lisp
-     (use-package flyspell
-       :ensure t
-       :config
-       (add-hook 'text-mode-hook #'turn-on-flyspell)
-       (add-hook 'prog-mode-hook #'flyspell-prog-mode)
-       (add-hook 'ess-mode-hook #'flyspell-prog-mode))
-   #+END_SRC
-* R (ESS)
-  ESS (short for Emacs Speaks Statistics) is the package that lets Emacs know about R and how it works. Let's load it up. No need to make sure that it is installed like we did with =use-package= in the previous section - =use-package= lets us just say "ensure" and will install it if it doesn't exist:  
+We can use =flyspell= for on-the-fly spell checking, similar to what we get with MS Word or whatever.
+ =C-;= runs =flyspell-auto-correct-previous-word= which automatically corrects the last word still on screen.
+ If it doesn't guess right the first time, press it again.
 
-  #+BEGIN_SRC emacs-lisp
-    (use-package ess-site
-      :ensure ess)
-  #+END_SRC
+For this to work, you'll need to have aspell or hunspell installed!
+#+BEGIN_SRC emacs-lisp
+  (use-package flyspell
+    :ensure t
+    :config
+    (add-hook 'text-mode-hook #'turn-on-flyspell)
+    (add-hook 'prog-mode-hook #'flyspell-prog-mode)
+    (add-hook 'ess-mode-hook #'flyspell-prog-mode))
+#+END_SRC
+* R (ESS)
+ESS (short for Emacs Speaks Statistics) is the package that lets Emacs know about R and how it works.
+Let's load it up.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package ess-site
+    :ensure ess)
+#+END_SRC
 
 * Latex (AuCTeX)
-  If you use latex to do any writing, you'll be happy to know that emacs is the highest-rated latex editor [[http://tex.stackexchange.com/questions/339/latex-editors-ides/][on stackexchange]].
+If you use latex to do any writing, you'll be happy to know that emacs is the highest-rated latex editor [[http://tex.stackexchange.com/questions/339/latex-editors-ides/][on stackexchange]].
   
-  #+BEGIN_SRC emacs-lisp
-    (use-package tex-site
-      :ensure auctex
-      :mode ("\\.tex\\'" . latex-mode)
-      :config
-      (setq TeX-parse-self t)
-      ;; Here we make auctex aware of latexmk and xelatexmk. We can use
-      ;; these instead of calling pdflatex, bibtex, pdflatex, pdflatex (or
-      ;; similar). I'll set latexmk as the default as there's really no
-      ;; reason to use pdflatex
-      (eval-after-load "tex"
-        '(add-to-list 'TeX-command-list '("latexmk" "latexmk -synctex=1 -shell-escape -pdf %s" TeX-run-TeX nil t :help "Process file with latexmk")))
-      (eval-after-load "tex"
-        '(add-to-list 'TeX-command-list '("xelatexmk" "latexmk -synctex=1 -shell-escape -xelatex %s" TeX-run-TeX nil t :help "Process file with xelatexmk")))
-      (add-hook 'TeX-mode-hook '(lambda () (setq TeX-command-default "latexmk"))))
-  #+END_SRC
+#+BEGIN_SRC emacs-lisp
+  (use-package tex-site
+    :ensure auctex
+    :mode ("\\.tex\\'" . latex-mode)
+    :config
+    (setq TeX-parse-self t)
+    ;; Here we make auctex aware of latexmk and xelatexmk. We can use
+    ;; these instead of calling pdflatex, bibtex, pdflatex, pdflatex (or
+    ;; similar). I'll set latexmk as the default as there's really no
+    ;; reason to use pdflatex
+    (eval-after-load "tex"
+      '(add-to-list 'TeX-command-list '("latexmk" "latexmk -synctex=1 -shell-escape -pdf %s" TeX-run-TeX nil t :help "Process file with latexmk")))
+    (eval-after-load "tex"
+      '(add-to-list 'TeX-command-list '("xelatexmk" "latexmk -synctex=1 -shell-escape -xelatex %s" TeX-run-TeX nil t :help "Process file with xelatexmk")))
+    (add-hook 'TeX-mode-hook '(lambda () (setq TeX-command-default "latexmk"))))
+#+END_SRC
 
 * Markdown
   Markdown is a good way to write up most things, though it doesn't hold a candle to emacs's built-in org-mode:
@@ -180,26 +186,27 @@ This fixes that by making Emacs know about the same PATH as the rest of the syst
   #+END_SRC
 
 * Git (magit)
-  Magit is an Emacs package that makes dealing with git awesome.
+Magit is an Emacs package that makes dealing with git awesome.
 
-  #+BEGIN_SRC emacs-lisp
-    (use-package magit
-      :ensure t
-      :bind ("C-x g" . magit-status))
-  #+END_SRC
+#+BEGIN_SRC emacs-lisp
+  (use-package magit
+    :ensure t
+    :bind ("C-x g" . magit-status))
+#+END_SRC
 
 * Ivy
-  Ivy is a completion framework that helps you find things (files, emacs commands, etc). We set it up here with a super minimal configuration because the reference 
+Ivy is a completion framework that helps you find things (files, emacs commands, etc).
+We set it up here with a super minimal configuration because the reference guide is pretty good.
 
-  #+BEGIN_SRC emacs-lisp
-    (use-package ivy
-      :ensure t
-      :config
-      (ivy-mode 1))
-  #+END_SRC
+#+BEGIN_SRC emacs-lisp
+  (use-package ivy
+    :ensure t
+    :config
+    (ivy-mode 1))
+#+END_SRC
 
 * References & bibliographies 
-  This package configuration lets you type =C-c C-r=  to bring up a list of your references. You can then search through it til you find the one you want. Hitting =RET= inserts a citation. There are a few other things you can do besides inserting citations - have a look by highlighting a bib entry and pressing =M-o=. 
+This package configuration lets you type =C-c C-r=  to bring up a list of your references. You can then search through it til you find the one you want. Hitting =RET= inserts a citation. There are a few other things you can do besides inserting citations - have a look by highlighting a bib entry and pressing =M-o=.
 
 =ivy-bibtex= can also keep track of pdfs of articles and notes that you take pertaining to these articles. Since this is a "minimal" configuration, I don't set that up here. If you're interested, look at =bibtex-completion-library-path= and =bibtex-completion-notes-path=
 
