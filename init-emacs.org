@@ -75,7 +75,6 @@ We'll use =company= (short for "complete anything") to do auto-completion. This 
           ("<tab>" . company-complete-common-or-cycle))
     :config
     (add-hook 'after-init-hook #'global-company-mode)
-    :config
     (use-package company-quickhelp
       :ensure t
       :config
