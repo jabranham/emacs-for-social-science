@@ -14,7 +14,7 @@
 ;;; Code:
 
 (if (version< emacs-version "24.5.1"); Minimum version is emacs 24.5.1
-    (error "Your Emacs is too old -- this config requires v%s or higher"))
+    (error "Your Emacs is too old -- this config requires v%s or higher" "24.5"))
 
 ;; Fix security issues in Emacs versions less than 25.3:
 (if (version< emacs-version "25.3")
