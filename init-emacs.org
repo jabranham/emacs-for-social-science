@@ -122,7 +122,8 @@ Let's load it up.
 
 #+BEGIN_SRC emacs-lisp
   (use-package ess-site
-    :ensure ess)
+    :ensure ess
+    :demand t)
 #+END_SRC
 
 * Latex (AuCTeX)
