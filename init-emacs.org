@@ -76,15 +76,14 @@ We'll use =company= (short for "complete anything") to do auto-completion. This 
           ("<tab>" . company-complete-common-or-cycle)))
 #+END_SRC
 
-** Smartparens
-This package will help you deal with matching pairs (e.g. (), "", etc) by automatically inserting the closing pair when you open it and allowing you to "wrap" expressions that are selected (in other words, if you've already written something and you realize you want it in quotes/parens, just highlight it and press the " or ( ):
+** Parens
+Show-parens-mode highlights matching parens, and electric-pair-mode tries to automatically match them (so when you type an opening paren, a closing one gets inserted too).
 
 #+BEGIN_SRC emacs-lisp
-  (use-package smartparens-config
-    :ensure smartparens
-    :hook
-    (after-init . smartparens-global-mode)
-    (after-init . show-smartparens-global-mode))
+  ;; Highlight matching parens & other pairs
+  (show-parens-mode)
+  ;; Automatically try to balance parens & other pairs
+  (electric-pair-mode)
 #+END_SRC
 
 ** Backup files
