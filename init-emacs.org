@@ -96,8 +96,8 @@ I want emacs to make these, but don't want to clutter up my project folders with
    
 ** Spell check 
 We can use =flyspell= for on-the-fly spell checking, similar to what we get with MS Word or whatever.
- =C-;= runs =flyspell-auto-correct-previous-word= which automatically corrects the last word still on screen.
- If it doesn't guess right the first time, press it again.
+=C-;= runs =flyspell-auto-correct-previous-word= which automatically corrects the last word still on screen.
+If it doesn't guess right the first time, press it again.
 
 For this to work, you'll need to have aspell or hunspell installed!
 #+BEGIN_SRC emacs-lisp
@@ -168,6 +168,7 @@ Magit is an Emacs package that makes dealing with git awesome.
 * Ivy
 Ivy is a completion framework that helps you find things (files, emacs commands, etc).
 We set it up here with a super minimal configuration because the reference guide is pretty good.
+Another completion framework you might be interested in is helm.
 
 #+BEGIN_SRC emacs-lisp
   (use-package ivy
