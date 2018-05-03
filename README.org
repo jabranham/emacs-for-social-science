@@ -133,6 +133,7 @@ Note that you might also need to install a spell checker. I recommend aspell:
     - I don't include as many customizations. This is intentional - his probably works better out-of-the-box for many people, but I think that this one should be easier to understand and further customize.
     - His is focused on Macs whereas this starter kit supports Linux, Mac, and Windows OS's (BSD should also work but has not been tested)
   - [[http://spacemacs.org/][Spacemacs]] is a community driven configuration. It is very powerful but super complicated - much more so than most people need. That said, if you're used to vim keybindings, this is probably the way to go
+  - [[https://github.com/hlissner/doom-emacs][Doom]] is another vim-like config that you might prefer if you like vim keybindings. Currently ESS/R support is only in the develop branch, it's due out in the 2.1 release.
 
 * Troubleshooting
   
