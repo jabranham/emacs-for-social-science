@@ -105,7 +105,7 @@ For this to work, you'll need to have aspell or hunspell installed!
     :ensure t
     :hook
     (text-mode . turn-on-flyspell)
-    ((prog-mode ess-mode) . flyspell-prog-mode))
+    (prog-mode . flyspell-prog-mode))
 #+END_SRC
 * R (ESS)
 ESS (short for Emacs Speaks Statistics) is the package that lets Emacs know about R and how it works.
