@@ -6,7 +6,7 @@
 
   So this should get people the absolute bare minimum needed to get started using R/latex/markdown/rmarkdown/sweave/knitr in emacs.
 
-  As far as I know, this works on all versions of emacs greater than 24.5.1 across Linux, Mac, and Windows operating systems. If you run into a problem, feel free to email me or create an issue in [[https://github.com/jabranham/emacs-for-social-science][this]] github repo.
+  As far as I know, this works on all versions of emacs greater than 25.3 across Linux, Mac, and Windows operating systems. If you run into a problem, feel free to email me or create an issue in [[https://github.com/jabranham/emacs-for-social-science][this]] github repo.
 * Installation 
 ** Step 1: Install Emacs 
    Installation instructions for Emacs are OS specific:
@@ -25,8 +25,8 @@ Note that you might also need to install a spell checker. I recommend aspell:
 *** Windows 
     These instructions are a condensed version of the official README. If you run into problems, consult the README:
     1. Go to [[http://ftp.gnu.org/gnu/emacs/windows/][this website]]
-    2. Download the latest version of Emacs (25.1 as of this writing)
-       1. If you run a 64-bit system (you probably do), select the 64-bit version. For Emacs 25.1 that's =emacs-25.1-x86_64-w64-mingw32.zip=
+    2. Download the latest version of Emacs (25.3 as of this writing)
+       1. If you run a 64-bit system (you probably do), select the 64-bit version. For Emacs 25.3 that's =emacs-25.3-x86_64-w64-mingw32.zip=
     3. Unzip that file into a directory where you want to install Emacs (=C:\Program Files=, for example)
     4. Run the =runemacs.exe= file inside the newly-created =bin= folder
        1. Optionally, you can add Emacs to the start menu by running the =addpm.exe= file
@@ -99,15 +99,6 @@ Note that you might also need to install a spell checker. I recommend aspell:
    | C-c C-a f  | markdown-insert-footnote |
    | C-c C-l    | markdown-jump            |
    | C-c C-a l  | markdown-insert-link     |
-
-** Rmarkdown/Rnw files (polymode)
-   Emacs handles rmarkdown and Rnw (R + Latex) files with =polymode=. So the markdown (or latex) parts of the file will use markdown (or latex) mode, while the R portions will use R mode (with ESS). 
-
-   | Keybinding | Function name           |
-   |------------+-------------------------|
-   | M-n C-n    | polymode-next-chunk     |
-   | M-n C-p    | polymode-previous-chunk |
-   | M-n e      | polymode-export         | 
   
 ** Git (Magit)
    When loading =magit=, I've bound =C-x g= to =magit-status= which is the starting point to your git experience inside Emacs. Once you're looking at the status of a repo, here are the most common commands:
