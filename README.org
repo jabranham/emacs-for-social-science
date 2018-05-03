@@ -47,14 +47,17 @@ Note that you might also need to install a spell checker. I recommend aspell:
 
     Windows users will need to replace =~= with wherever Emacs is calling home, as described above.
     
-** Step 3: Start Emacs
+** Step 3: Optionally install other programs
+If you want spell check to work, you'll need to install a spell checker. Either aspell or hunspell works fine.
+
+You'll also probably want to make sure you have whatever program(s) you want to work with installed: R, LaTeX, git, pandoc, etc. 
+** Step 4: Start Emacs
    When you start Emacs, it should start downloading and compiling some files (packages). Just sit back for this part - it'll take a minute. You may need to answer "y" when prompted about saving abbreviations. It will output warnings and some messages - you may ignore these. If the process stops, quit Emacs and restart it.
 
    If you restart Emacs and are presented with an ugly screen with some links to a tutorial, walkthrough, and others, and NO errors, then everything has set up successfully! You're ready to go.
 
 *** Immediate customization
     You'll need to set up a few things like telling Emacs where your big =.bib= file is. All of these are in the =init-emacs.org= file near the top under the section "Your customizations". So, for example, to let Emacs know about your big bib file, you would change the value of the =my/bib-file-location= to wherever your bib file is located on your computer.
-   
 * Usage
 
   Many of Emacs' keybindings look something like =C-c= or =M-c=. The first says control-c, the second meta-c. The meta key is usually alt. =M-x= provides a searchable list of commands you can run, so if you can't remember the exact name, you can look it up using =M-x=. There is a general-purpose tutorial you can access with =C-h t=. It will teach you most of the basic commands necessary to move around inside Emacs. I highly recommend skimming through it. 
