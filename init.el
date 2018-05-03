@@ -37,6 +37,6 @@
 (package-initialize)
 
 ;; Load the init-emacs.org file:
-(org-babel-load-file (concat user-emacs-directory "init-emacs.org"))
+(org-babel-load-file (expand-file-name "init-emacs.org" user-emacs-directory))
 
 ;;; init.el ends here
