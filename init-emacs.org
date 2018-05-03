@@ -114,7 +114,10 @@ Let's load it up.
 #+BEGIN_SRC emacs-lisp
   (use-package ess-site
     :ensure ess
-    :demand t)
+    :demand t
+    :config
+    ;; Don't hog Emacs when submitting long-running code
+    (setq ess-eval-visibly 'nowait))
 #+END_SRC
 
 * Latex (AuCTeX)
