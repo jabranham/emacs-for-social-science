@@ -12,20 +12,8 @@
 
 
 ;;; Code:
-
-(if (version< emacs-version "24.5.1"); Minimum version is emacs 24.5.1
-    (error "Your Emacs is too old -- this config requires v%s or higher" "24.5"))
-
-;; Fix security issues in Emacs versions less than 25.3:
 (if (version< emacs-version "25.3")
-    (progn
-      ;; Mitigate Bug#28350 (security) in Emacs 25.2 and earlier.
-      (eval-after-load "enriched"
-        '(defun enriched-decode-display-prop (start end &optional param)
-           (list start end)))
-
-      ;; https://bugs.debian.org/766397
-      (setq tls-program '("gnutls-cli --x509cafile %t -p %p %h"))))
+    (error "Your Emacs is too old -- this config requires 25.3 or higher"))
 
 ;; package.el customization - here we set up how Emacs handles packages!
 (require 'package)
